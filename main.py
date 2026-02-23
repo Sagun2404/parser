@@ -1,32 +1,66 @@
+import os
+
 from core.graph import CodeGraph
 from scanning.file_scanner import scan_directory
 from parsing.parser_factory import parse_source
 from parsing.query_loader import load_query
-from extraction.generic_extractor import extract
+from extraction.registry import EXTRACTOR_REGISTRY
 from serialization.json_serializer import export_graph
 
 
-def main(project_path):
+def main(project_path: str):
+ 
+
     graph = CodeGraph()
 
     for file_path, language, source in scan_directory(project_path):
+    
+       
+        print(f"Processing file: {file_path}")
+        print(f"Detected language: {language}")
 
-        tree, language_obj = parse_source(language, source)
+        try:
+            # Parse source
+            tree, language_obj = parse_source(language, source)
+            print(f"Parsed AST for {file_path}")
+            # Load query
+            query = load_query(language, language_obj)
+            print(f"Loaded query for {language}")
+            # Get language-specific extractor
+            extractor = EXTRACTOR_REGISTRY.get(language)
+            print(f"Using extractor: {extractor.__class__.__name__}" if extractor else "No extractor found")
+            if not extractor:
+                print(f"No extractor found for language: {language}")
+                continue
 
-        query = load_query(language, language_obj)
+            # Inject query into extractor
+            extractor.query = query
 
-        entities, relationships = extract(
-            tree, source, file_path, query
-        )
+            # Extract entities and relationships
+            entities, relationships = extractor.extract(
+                tree, source, file_path
+            )
 
-        for e in entities:
-            graph.add_entity(e)
+            # Add to graph
+            for entity in entities:
+                graph.add_entity(entity)
 
-        for r in relationships:
-            graph.add_relationship(r)
+            for relationship in relationships:
+                graph.add_relationship(relationship)
 
-    export_graph(graph)
+        except Exception as e:
+            print(f"Error processing {file_path}")
+            print(f"Reason: {e}")
+            continue
+
+    # Export final graph
+    output_path = os.path.join(os.getcwd(), "output.json")
+    export_graph(graph, output_path)
+
+    print("\nAnalysis complete.")
+    print(f"Output written to: {output_path}")
 
 
 if __name__ == "__main__":
-    main("test_project")
+    # Change this to your test directory
+    main("test")

@@ -2,15 +2,18 @@
 (function_declaration
   name: (identifier) @definition.function)
 
-; Interface/Class declarations
+; Class declarations
 (class_declaration
-  name: (identifier) @definition.class)
+  name: (type_identifier) @definition.class)
 
-(interface_declaration
-  name: (identifier) @definition.interface)
+; Method definitions inside classes
+(method_definition
+  name: (property_identifier) @definition.method)
 
 ; Function calls
 (call_expression
   function: (identifier) @reference.call)
 
-
+; Imports
+(import_statement
+  source: (string) @import.statement)
