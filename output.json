@@ -1,4 +1,71 @@
 {
-  "entities": [],
+  "entities": [
+    {
+      "id": "ebc2fe97-601a-401a-af6b-2e36c14e1097",
+      "type": "class",
+      "name": "Calculator",
+      "file": "test\\sample.py",
+      "start_line": 3,
+      "end_line": 3,
+      "signature": null,
+      "parent_id": null,
+      "metadata": {}
+    },
+    {
+      "id": "cc05075c-8ff8-407f-b304-ba68c9ec5173",
+      "type": "function",
+      "name": "add",
+      "file": "test\\sample.py",
+      "start_line": 4,
+      "end_line": 4,
+      "signature": null,
+      "parent_id": null,
+      "metadata": {}
+    },
+    {
+      "id": "e649f048-8de7-49a5-8c7f-44a18bd6398c",
+      "type": "function",
+      "name": "square",
+      "file": "test\\sample.py",
+      "start_line": 7,
+      "end_line": 7,
+      "signature": null,
+      "parent_id": null,
+      "metadata": {}
+    },
+    {
+      "id": "8fa485f5-95fb-4adc-9dd1-509058c6ad56",
+      "type": "call",
+      "name": "sqrt",
+      "file": "test\\sample.py",
+      "start_line": 8,
+      "end_line": 8,
+      "signature": null,
+      "parent_id": null,
+      "metadata": {}
+    },
+    {
+      "id": "91ae26bb-94fc-4436-8a66-cecfb24a6644",
+      "type": "call",
+      "name": "square",
+      "file": "test\\sample.py",
+      "start_line": 10,
+      "end_line": 10,
+      "signature": null,
+      "parent_id": null,
+      "metadata": {}
+    },
+    {
+      "id": "fe0ffdfc-c93f-4ca5-a0ca-bae51ae1a844",
+      "type": "variable",
+      "name": "result",
+      "file": "test\\sample.py",
+      "start_line": 10,
+      "end_line": 10,
+      "signature": null,
+      "parent_id": null,
+      "metadata": {}
+    }
+  ],
   "relationships": []
 }

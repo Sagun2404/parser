@@ -20,6 +20,6 @@ EXTRACTOR_REGISTRY = {
     "ruby": RubyExtractor(),
     "rust": RustExtractor(),
     "go": GoExtractor(),
-    "c_sharp": CSharpExtractor(),
+    "csharp": CSharpExtractor(),
     
 }

@@ -10,7 +10,7 @@ EXTENSION_LANGUAGE_MAP = {
     ".rs": "rust",
     ".go": "go",
     ".java": "java",
-    ".cs": "c_sharp",
+    ".cs": "csharp",
     ".rb": "ruby",
 }
 

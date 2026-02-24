@@ -10,7 +10,7 @@ SUPPORTED_LANGUAGES = {
     "rust": "rust",
     "go": "go",
     "java": "java",
-    "c_sharp": "c_sharp",
+    "csharp": "csharp",
     "ruby": "ruby",
 }
 

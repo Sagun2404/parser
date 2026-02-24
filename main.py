@@ -12,11 +12,7 @@ def main(project_path: str):
   
 
 
-    try:
-        csharp_lang = get_language("")
-        print("✅ HTML is supported as 'node'")
-    except ValueError:
-     print("❌ Language not found")
+    
     
     graph = CodeGraph()
 
