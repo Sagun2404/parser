@@ -8,6 +8,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "tree-sitter" },
+    { name = "tree-sitter-c-sharp" },
     { name = "tree-sitter-language-pack" },
     { name = "tree-sitter-python" },
     { name = "tree-sitter-typescript" },
@@ -16,6 +17,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "tree-sitter", specifier = ">=0.25.2" },
+    { name = "tree-sitter-c-sharp", specifier = ">=0.23.1" },
     { name = "tree-sitter-language-pack", specifier = ">=0.13.0" },
     { name = "tree-sitter-python", specifier = ">=0.25.0" },
     { name = "tree-sitter-typescript", specifier = ">=0.23.2" },

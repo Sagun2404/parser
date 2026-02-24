@@ -1,18 +1,34 @@
-; Function definitions
-(function_definition
-  name: (identifier) @definition.function)
-
-; Class definitions
+; =========================
+; CLASS DEFINITIONS
+; =========================
 (class_definition
   name: (identifier) @definition.class)
 
-; Function calls
+; =========================
+; FUNCTION DEFINITIONS
+; =========================
+(function_definition
+  name: (identifier) @definition.function)
+
+; =========================
+; VARIABLE DEFINITIONS
+; =========================
+(assignment
+  left: (identifier) @definition.variable)
+
+; =========================
+; IMPORTS
+; =========================
+(import_statement
+  name: (dotted_name
+          (identifier) @reference.import))
+
+; =========================
+; FUNCTION CALLS
+; =========================
 (call
   function: (identifier) @reference.call)
 
-; Imports
-(import_statement
-  name: (dotted_name) @import.statement)
-
-(import_from_statement
-  module_name: (dotted_name) @import.statement)
+(call
+  function: (attribute
+              attribute: (identifier) @reference.call))

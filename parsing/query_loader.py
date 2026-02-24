@@ -7,4 +7,5 @@ def load_query(language, language_obj):
     with open(query_path, "r", encoding="utf-8") as f:
         query_str = f.read()
    
+   
     return language_obj.query(query_str)
