@@ -1,39 +1,33 @@
 from core.relationship import Relationship
 
-
 def build_call_graph(entities, relationships):
-    function_map = {}
-    calls = []
+    # 1. Create a lookup map of all definitions (functions/classes)
+    # We map name -> entity_id for quick searching
+    definitions = {
+        e.name: e.id 
+        for e in entities 
+        if e.type in ["function", "class"]
+    }
 
-    # Index functions/methods
-    for entity in entities:
-        if entity.type in ["function", "method"]:
-            function_map[entity.name] = entity
-
-    # Collect call entities
+    # 2. Iterate through all entities to find 'calls'
     for entity in entities:
         if entity.type == "call":
-            calls.append(entity)
-
-    # Resolve calls
-    for call in calls:
-        caller = None
-
-        # Find parent function
-        for entity in entities:
-            if entity.id == call.parent_id and entity.type in ["function", "method"]:
-                caller = entity
-                break
-
-        callee = function_map.get(call.name)
-
-        if caller and callee:
-            relationships.append(
-                Relationship(
-                    source_id=caller.id,
-                    target_id=callee.id,
-                    type="calls"
+            # Check if the name of the call matches a known definition
+            # (Note: You might need to strip parens/arguments if your name is "square(10)")
+            call_name = entity.name.split('(')[0].split('.')[-1]
+            
+            if call_name in definitions:
+                target_id = definitions[call_name]
+                
+                # 3. Create a 'calls' relationship
+                # The source is the PARENT of the call (e.g., the function it's inside)
+                # or the call entity itself. Usually, we link caller_func -> callee_func.
+                relationships.append(
+                    Relationship(
+                        source_id=entity.parent_id or entity.id, 
+                        target_id=target_id,
+                        type="calls"
+                    )
                 )
-            )
-
+    
     return relationships

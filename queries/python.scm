@@ -2,33 +2,25 @@
 ; CLASS DEFINITIONS
 ; =========================
 (class_definition
-  name: (identifier) @definition.class)
+  name: (identifier) @class.name) @definition.class
 
 ; =========================
 ; FUNCTION DEFINITIONS
 ; =========================
 (function_definition
-  name: (identifier) @definition.function)
+  name: (identifier) @function.name) @definition.function
 
 ; =========================
 ; VARIABLE DEFINITIONS
 ; =========================
 (assignment
-  left: (identifier) @definition.variable)
-
-; =========================
-; IMPORTS
-; =========================
-(import_statement
-  name: (dotted_name
-          (identifier) @reference.import))
+  left: (identifier) @variable.name) @definition.variable
 
 ; =========================
 ; FUNCTION CALLS
 ; =========================
 (call
-  function: (identifier) @reference.call)
-
-(call
-  function: (attribute
-              attribute: (identifier) @reference.call))
+  function: [
+    (identifier) @call.name
+    (attribute attribute: (identifier) @call.name)
+  ]) @reference.call
